@@ -10,6 +10,7 @@
 //     inline while ( i < foo.len ) : (i += 1) {
 //         print(foo[i] ++ "\n", .{foo[i]});
 //     }
+//     // ~~{s}~~   <<{s}>>     dd{s}bb
 //
 // You haven't taken off that wizard hat yet, have you?
 //
@@ -35,7 +36,7 @@ pub fn main() void {
     // at compile time.
     //
     // Please fix this to loop once per "instruction":
-    ??? (i < instructions.len) : (???) {
+    inline while (i < instructions.len) : (i += 3) {
 
         // This gets the digit from the "instruction". Can you
         // figure out why we subtract '0' from it?
