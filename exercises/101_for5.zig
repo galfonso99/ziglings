@@ -51,7 +51,7 @@ pub fn main() void {
 
     // We would like to number our list starting with 1, not 0.
     // How do we do that?
-    for (roles, gold, experience, ???) |c, g, e, i| {
+    for (roles, gold, experience, 1..) |c, g, e, i| {
         const role_name = switch (c) {
             .wizard => "Wizard",
             .thief => "Thief",
@@ -78,7 +78,7 @@ pub fn main() void {
 // Let's use a metaphor to build up an intuition for what this is
 // all about:
 //
-// Let's say you've been tasked with grabbing three glass
+// Let's say you've been tasked wth grabbing three glass
 // marbles, three spoons, and three feathers from a magic bag.
 // But you can't use your hands to grab them. Instead, you must
 // use a marble scoop, spoon magnet, and feather tongs to grab
