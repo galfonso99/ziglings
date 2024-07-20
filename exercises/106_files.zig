@@ -35,7 +35,7 @@ pub fn main() !void {
         // by doing nothing
         //
         // we want to catch error.PathAlreadyExists and do nothing
-        ??? => {},
+        error.PathAlreadyExists => {},
         // if there's any other unexpected error we just propagate it through
         else => return e,
     };
@@ -44,7 +44,7 @@ pub fn main() !void {
     // wait a minute...
     // opening a directory might fail!
     // what should we do here?
-    var output_dir: std.fs.Dir = cwd.openDir("output", .{});
+    var output_dir: std.fs.Dir = try cwd.openDir("output", .{});
     defer output_dir.close();
 
     // we try to open the file `zigling.txt`,
@@ -54,14 +54,14 @@ pub fn main() !void {
     // so that other programs can read it and prevent data corruption
     // but here we are not yet done writing to the file
     // if only there were a keyword in Zig that
-    // allowed you to "defer" code execution to the end of the scope...
-    file.close();
+    // allowed you to "" code execution to the end of the scope...
+    defer file.close();
 
     // you are not allowed to move these two lines above the file closing line!
     const byte_written = try file.write("It's zigling time!");
     std.debug.print("Successfully wrote {d} bytes.\n", .{byte_written});
 }
-// to check if you actually write to the file, you can either,
+// to check if you actually wrote to the file, you can either,
 // 1. open the file in your text editor, or
 // 2. print the content of the file in the console with the following command
 //    >> cat ./output/zigling.txt
